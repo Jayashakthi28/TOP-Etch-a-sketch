@@ -36,7 +36,6 @@ document.querySelectorAll('.control-wrapper').forEach((data,index)=>{
             grey.classList.remove('outline');
             randomize.classList.add('outline');
         }
-        console.log(data,index);
     });
 });
 color.querySelector('input').addEventListener('input',()=>{
@@ -111,7 +110,6 @@ function hoverer(){
               document.querySelector('.color-code-cont').innerHTML=color_var;
               main_div.style.border=`1px solid ${color_var}`;
             }
-        //   console.log(t1,t2,t3);
         })
     })
 }
