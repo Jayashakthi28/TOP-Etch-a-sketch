@@ -82,36 +82,63 @@ boxes.addEventListener("input",()=>{
     hoverer();
 })
 
+function colorApplier(data){
+    let t1,t2,t3;
+    if(color_var===null){
+      t1=randomer();
+      t2=randomer();
+      t3=randomer();
+      data.style.backgroundColor=`rgb(${t1},${t2},${t3})`;
+      document.querySelector('.color-code-cont').innerHTML=`RGB(${t1},${t2},${t3})`;
+      main_div.style.border=`1px solid rgb(${t1},${t2},${t3})`;
+  }
+    else if(color_var==='black'){
+        t1=randomer();
+        t2=t1;
+        t3=t1;
+        data.style.backgroundColor=`rgb(${t1},${t2},${t3})`;
+        document.querySelector('.color-code-cont').innerHTML=`RGB(${t1},${t2},${t3})`;
+        main_div.style.border=`1px solid rgb(${t1},${t2},${t3})`;
+      }
+    else{
+        data.style.backgroundColor=color_var;
+        document.querySelector('.color-code-cont').innerHTML=color_var;
+        main_div.style.border=`1px solid ${color_var}`;
+      }
+}
 
 
 function hoverer(){
     let innerBoxes=[...document.querySelectorAll('.color-box')];
     innerBoxes.forEach(data=>{
         data.addEventListener("mouseover",(e)=>{
-          let t1,t2,t3;
-          if(color_var===null){
-            t1=randomer();
-            t2=randomer();
-            t3=randomer();
-            data.style.backgroundColor=`rgb(${t1},${t2},${t3})`;
-            document.querySelector('.color-code-cont').innerHTML=`RGB(${t1},${t2},${t3})`;
-            main_div.style.border=`1px solid rgb(${t1},${t2},${t3})`;
-        }
-          else if(color_var==='black'){
-              t1=randomer();
-              t2=t1;
-              t3=t1;
-              data.style.backgroundColor=`rgb(${t1},${t2},${t3})`;
-              document.querySelector('.color-code-cont').innerHTML=`RGB(${t1},${t2},${t3})`;
-              main_div.style.border=`1px solid rgb(${t1},${t2},${t3})`;
-            }
-          else{
-              data.style.backgroundColor=color_var;
-              document.querySelector('.color-code-cont').innerHTML=color_var;
-              main_div.style.border=`1px solid ${color_var}`;
-            }
+            colorApplier(data);
         })
+        // data.addEventListener("touchstart",(e)=>{
+        //     console.log(e);
+        //     let touches=e.changedTouches;
+        //     for(let i=0;i<e.changedTouches.length;i++){
+        //         let touchId=e.changedTouches[i].identifier;
+        //         let x=e.changedTouches[i].pageX;
+        //         let y=e.changedTouches[i].pageY;
+        //         console.log(touchId,x,y);
+
+        //     }
+        //     colorApplier(data);
+        // })
     })
 }
+
+let prev=null;
+main_div.addEventListener("touchmove",(e)=>{
+    console.log(e);
+    e.preventDefault();
+    const ele=document.elementFromPoint(e.touches[0].clientX,e.touches[0].clientY);
+    if(ele===prev || ele===null || !ele.classList.contains('color-box')){
+        return;
+    }
+    prev=ele;
+    colorApplier(ele);
+})
 
 hoverer();

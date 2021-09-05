@@ -156,3 +156,23 @@ main{
     background-color: greenyellow;
     border: 2px solid rgb(255, 255, 255);
 } */
+
+@media (max-width:989px) {
+    main{
+        min-height: 100vh;
+        height: fit-content;
+    }
+    .main-cont{
+        flex-direction: column;
+    }
+    .main-cont>*{
+        margin: 0.5rem 0;
+    }
+    .main-div{
+        width: 90vw;
+        height: 90vw;
+    }
+    .control-cont>*{
+        margin: 0.3rem 0;
+    }
+}
